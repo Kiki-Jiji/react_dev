@@ -18,18 +18,24 @@ class SearchBar extends React.Component {
   };
 }
 
-  getSortByOption(sortByOptions) {
-    if (sort) {
-      return 'active'
-    } else {
-      return ''
-    }
+getSortByClass(sortByOption) {
+  if (this.state.sortBy === sortByOption) {
+    return 'active';
+  }
+  return '';
+}
+
+
+  handleSortByChange(sortByOption) {
+    this.setState({sortBy : sortByOption });
   }
 
   renderSortByOptions() {
       return Object.keys(sortByOptions).map(sortByOption => {
-              let sortByOptionsValue = sortByOptions[sortByOption];
-              return <li key={sortByOptionsValue}>{sortByOption}</li>
+              let sortByOptionValue = sortByOptions[sortByOption];
+              return ( <li onClick={this.handleSortByChange.bind(this, sortByOptionValue)}
+               className={this.getSortByClass(sortByOptionValue)}
+                key={sortByOptionValue} >{sortByOption}</li> )
             }
     );
   }
